@@ -1,0 +1,33 @@
+<section id="searchingSection">
+    <h2>Searching by original, translated, alternative names and titles!</h2>
+    <form>
+        <div class="form-row mt-4">
+            <div class="col-md-8 col-12 mb-4 mb-md-0">
+                <input [(ngModel)]="queryString" name="queryString" class="form-control form-control-lg" placeholder="Enter keywords here...">
+            </div>
+            <div class="col-md-2 col-6">
+                <button class="btn btn-primary btn-lg btn-block" (click)="searchByQueryString()">Search!</button>
+            </div>
+            <div class="col-md-2 col-6">
+                <div ngbDropdown>
+                    <button type="button" class="btn btn-primary btn-lg btn-block" id="dropdownBasic1" ngbDropdownToggle>Choose genre</button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <button (click)="getTopPopularMovies()" class="dropdown-item">Top popular movies</button>
+                        <button *ngFor="let genre of genres" (click)="searchByGenre(genre.id)" class="dropdown-item">{{genre.name}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="card-deck mt-5" *ngFor="let chunks of movies">
+        <div class="card" *ngFor="let movie of chunks">
+            <a routerLink="/media/{{movie.media_type}}/{{movie.id}}">
+                <img *ngIf="movie.poster_path" class="card-img-top" src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/{{movie.poster_path}}" alt="{{movie.original_title}} cover">
+                <img *ngIf="!movie.poster_path" class="card-img-top" src="assets/img/movie-cover-placeholder.png" alt="cover placeholder">
+                <div class="card-body">
+                    <h5 class="card-title">{{movie.title}}</h5>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>

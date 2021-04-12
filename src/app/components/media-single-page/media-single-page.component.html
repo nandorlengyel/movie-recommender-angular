@@ -1,0 +1,52 @@
+<button routerLink="/media" type="button" class="btn btn-outline-secondary btn-block">Back to search...</button>
+
+<section id="actualMovieSection" class="mb-3 mt-4" *ngIf="actualMovie">
+    <div class="card">
+        <div class="row no-gutters ">
+            <div class="col-md-3 ">
+                <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/{{actualMovie.poster_path}} " class="card-img " alt="{{actualMovie.title}} cover">
+                <img *ngIf="!actualMovie.poster_path" class="card-img-top" src="assets/img/movie-cover-placeholder.png" alt="cover placeholder">
+            </div>
+            <div class="col-md-9 ">
+                <div class="card-body ">
+                    <h3 class="card-title ">{{actualMovie.title}}</h3>
+                </div>
+                <ul class="list-group list-group-flush ">
+                    <li class="list-group-item ">{{actualMovie.overview}}</li>
+                    <li class="list-group-item ">Original language: {{actualMovie.original_language}}</li>
+                    <li class="list-group-item ">Relaese date: {{actualMovie.release_date}}</li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</section>
+<section id="actorsOfMovie" class="mt-5 ">
+    <h2>Main actors in the movie:</h2>
+    <div class="card-deck p-1 mt-3">
+        <div class="card " *ngFor="let actor of actors ">
+            <a routerLink="/actor/{{actor.id}}">
+                <img *ngIf="actor.profile_path " class="card-img-top " src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/{{actor.profile_path}} " alt="{{actor.name}} cover ">
+                <img *ngIf="!actor.profile_path " class="card-img-top " src="assets/img/movie-cover-placeholder.png " alt="cover placeholder ">
+                <div class="card-body ">
+                    <p class="card-title ">{{actor.name}}
+                        <p>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+<section class="mt-5 " id="recommendedMoviesSection ">
+    <h2>Recommended movies:</h2>
+    <div class="card-deck p-1 mt-3 ">
+        <div class="card " *ngFor="let movie of similarMovies ">
+            <a routerLink="/media/{{movie.media_type}}/{{movie.id}}">
+                <img *ngIf="movie.poster_path " class="card-img-top " src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/{{movie.poster_path}} " alt="{{movie.original_title}} cover ">
+                <img *ngIf="!movie.poster_path " class="card-img-top " src="assets/img/movie-cover-placeholder.png " alt="cover placeholder ">
+                <div class="card-body ">
+                    <p class="card-title ">{{movie.title}}</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>

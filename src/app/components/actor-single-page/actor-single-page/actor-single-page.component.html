@@ -1,0 +1,35 @@
+<button routerLink="/media" type="button" class="btn btn-outline-secondary btn-block">Back to search...</button>
+
+<section id="actualActor" class="mb-3 mt-4" *ngIf="actualActor">
+    <div class="card">
+        <div class="row no-gutters">
+            <div class="col-md-3">
+                <img *ngIf="actualActor.profile_path" class="card-img-top" src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/{{actualActor.profile_path}}" alt="{{actualActor.name}} cover">
+                <img *ngIf="!actualActor.profile_path" class="card-img-top" src="assets/img/movie-cover-placeholder.png" alt="cover placeholder">
+            </div>
+            <div class="col-md-9">
+                <div class="card-body">
+                    <h3 class="card-title">{{actualActor.name}}</h3>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Birthday: {{actualActor.birthday}}</li>
+                    <li class="list-group-item"> {{actualActor.biography}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<section *ngIf="actualActor" id="actualActorsRoles" class="mt-5">
+    <h2>Some of {{actualActor.name}}'s roles:</h2>
+    <div class="card-deck p-1 mt-3">
+        <div class="card" *ngFor="let movie of movies">
+            <a routerLink="/media/{{movie.media_type}}/{{movie.id}}">
+                <img *ngIf="movie.poster_path" class="card-img-top" src="https://image.tmdb.org/t/p/w600_and_h900_bestv2/{{movie.poster_path}}" alt="{{movie.original_title}} cover">
+                <img *ngIf="!movie.poster_path" class="card-img-top" src="assets/img/movie-cover-placeholder.png" alt="cover placeholder">
+                <div class="card-body">
+                    <p class="card-title">{{movie.title}}</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
